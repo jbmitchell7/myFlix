@@ -52,7 +52,7 @@ app.use(express.static('public'));
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
-  });
+});
 
 // GET requests
 app.get('/', (req, res) => {
@@ -62,7 +62,6 @@ app.get('/', (req, res) => {
 app.get('/movies', (req, res) => {
     res.json(favMovies);
 });
-
 
 // listen for requests
 app.listen(8080, () => {
