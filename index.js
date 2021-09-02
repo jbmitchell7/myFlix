@@ -2,7 +2,7 @@ const express = require('express'),
     morgan = require('morgan');
 const app = express();
 
-let favMovies = [
+let movies = [
     {
         title: 'Lord of the Rings',
         director: 'Peter Jackson'
@@ -49,18 +49,56 @@ app.use(morgan('common'));
 
 app.use(express.static('public'));
 
+// GET requests
+
+app.get('/movies', (req, res) => {
+    res.json(movies);
+});
+
+app.get('/movies/:title', (req, res) => {
+    res.json(movies.find((movie) => { return movie.title === req.params.title }));
+});
+
+app.get('/genres/:title', (req, res) => {
+    res.send('Returns description of movie genre');
+});
+
+app.get('/directors/:name', (req, res) => {
+    res.send('Returns data about a director');
+});
+
+app.post('/users', (req, res) => {
+    let newUser = req.body;
+
+    if (!newUser.email) {
+        const message = 'Missing email in request body';
+        res.status(400).send(message);
+    } else {
+        newUser.id = uuid.v4();
+        users.push(newUser);
+        res.status(201).send(newUser);
+    }
+});
+
+app.put('/users/:username', (req, res) => {
+    res.send('Updates username of the user');
+});
+
+app.post('/users/:id/favorites/:title', (req, res) => {
+    res.send('Movie has been added to favorites');
+});
+
+app.delete('/users/:id/favorites/:title', (req, res) => {
+    res.send('Movie has been removed to favorites');
+});
+
+app.delete('/users/:id', (req, res) => {
+    res.send('Email has been deregistered')
+})
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
-});
-
-// GET requests
-app.get('/', (req, res) => {
-    res.send('Welcome to myFlix Movies Database!');
-});
-
-app.get('/movies', (req, res) => {
-    res.json(favMovies);
 });
 
 // listen for requests
