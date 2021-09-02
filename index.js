@@ -68,16 +68,7 @@ app.get('/directors/:name', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-    let newUser = req.body;
-
-    if (!newUser.email) {
-        const message = 'Missing email in request body';
-        res.status(400).send(message);
-    } else {
-        newUser.id = uuid.v4();
-        users.push(newUser);
-        res.status(201).send(newUser);
-    }
+    res.send('New user has been created');
 });
 
 app.put('/users/:username', (req, res) => {
