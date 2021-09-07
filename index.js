@@ -2,49 +2,6 @@ const express = require('express'),
     morgan = require('morgan');
 const app = express();
 
-let movies = [
-    {
-        title: 'Lord of the Rings',
-        director: 'Peter Jackson'
-    },
-    {
-        title: 'Blade Runner',
-        director: 'Ridley Scott'
-    },
-    {
-        title: 'Alien',
-        director: 'Ridley Scott'
-    },
-    {
-        title: 'The Dark Knight',
-        director: 'Christopher Nolan'
-    },
-    {
-        title: 'Parasite',
-        director: 'Bong Joon-ho'
-    },
-    {
-        title: 'Jurassic Park',
-        director: 'Steven Spielberg'
-    },
-    {
-        title: 'The Social Network',
-        director: 'David Fincher'
-    },
-    {
-        title: 'The Good, the Bad, and the Ugly',
-        director: 'Sergio Leone'
-    },
-    {
-        title: 'Jaws',
-        director: 'Steven Spielberg'
-    },
-    {
-        title: 'Rear Window',
-        director: 'Alfred Hitchcock'
-    },
-];
-
 app.use(morgan('common'));
 
 app.use(express.static('public'));
@@ -52,11 +9,11 @@ app.use(express.static('public'));
 // GET requests
 
 app.get('/movies', (req, res) => {
-    res.json(movies);
+    res.json('returns all movies');
 });
 
 app.get('/movies/:title', (req, res) => {
-    res.json(movies.find((movie) => { return movie.title === req.params.title }));
+    res.json('returns of movie with given title');
 });
 
 app.get('/genres/:title', (req, res) => {
