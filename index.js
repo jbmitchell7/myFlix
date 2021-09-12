@@ -39,10 +39,10 @@ app.get('/movies/:Title', (req, res) => {
         });
 });
 //not working
-app.get('/movies/genres/:Title', (req, res) => {
-    Movies.findOne({ Genre: req.params.Title })
+app.get('/movies/:Genre/:Name', (req, res) => {
+    Movies.findOne({ Genre: req.params.Name })
         .then((movie) => {
-            res.json(movie.genre);
+            res.json(movie);
         })
         .catch((err) => {
             console.error(err);
