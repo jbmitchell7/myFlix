@@ -38,22 +38,22 @@ app.get('/movies/:Title', (req, res) => {
             res.status(500).send('Error: ' + err);
         });
 });
-//not working
-app.get('/movies/:Genre/:Name', (req, res) => {
-    Movies.findOne({ Genre: req.params.Name })
+//not working-prints wrong genre description
+app.get('/movies/Genres/:Name', (req, res) => {
+    Movies.findOne({ Name: req.params.Name })
         .then((movie) => {
-            res.json(movie);
+            res.json(movie.Genre.Description);
         })
         .catch((err) => {
             console.error(err);
             res.status(500).send('Error: ' + err);
         });
 });
-//not working
-app.get('/movies/Director/:Name', (req, res) => {
-    Movies.findOne({ Director: req.params.Director })
+//not working-showing wrong director data
+app.get('/movies/Directors/:Name', (req, res) => {
+    Movies.findOne({ Name: req.params.Name })
         .then((movie) => {
-            res.json(movie);
+            res.json(movie.Director);
         })
         .catch((err) => {
             console.error(err);
