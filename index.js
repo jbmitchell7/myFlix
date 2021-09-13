@@ -74,7 +74,7 @@ app.post('/users', (req, res) => {
                         Email: req.body.Email,
                         Birthday: req.body.Birthday
                     })
-                    .then((user) => { res.status(201).json(user) })
+                    .then((user) => { res.status(201).send(req.body.Username = ' has been created.') })
                     .catch((error) => {
                         console.error(error);
                         res.status(500).send('Error: ' + error);
@@ -103,7 +103,7 @@ app.put('/users/:Username', (req, res) => {
                 console.error(err);
                 res.status(500).send('Error: ' + err);
             } else {
-                res.json(updatedUser);
+                res.status(200).send('Username has been updated.');
             }
         });
 });
@@ -118,7 +118,7 @@ app.post('/users/:Username/movies/:$oid', (req, res) => {
                 console.error(err);
                 res.status(500).send('Error: ' + err);
             } else {
-                res.json(updatedUser);
+                res.status(200).send(req.params.$oid + ' has been added to favorites.');
             }
         });
 });
@@ -133,7 +133,7 @@ app.delete('/users/:Username/movies/:$oid', (req, res) => {
                 console.error(err);
                 res.status(500).send('Error: ' + err);
             } else {
-                res.json(updatedUser);
+                res.status(200).send(req.params.$oid + ' has been removed from favorites.');
             }
         });
 });
