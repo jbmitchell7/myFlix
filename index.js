@@ -38,22 +38,22 @@ app.get('/movies/:Title', (req, res) => {
             res.status(500).send('Error: ' + err);
         });
 });
-//not working-prints wrong genre description
+//working
 app.get('/movies/Genres/:Name', (req, res) => {
-    Movies.findOne({ Name: req.params.Name })
+    Movies.find({ 'Genre.Name': req.params.Name })
         .then((movie) => {
-            res.json(movie.Genre.Description);
+            res.json(movie[0].Genre.Description);
         })
         .catch((err) => {
             console.error(err);
             res.status(500).send('Error: ' + err);
         });
 });
-//not working-showing wrong director data
+//working
 app.get('/movies/Directors/:Name', (req, res) => {
-    Movies.findOne({ Name: req.params.Name })
+    Movies.find({ 'Director.Name': req.params.Name })
         .then((movie) => {
-            res.json(movie.Director);
+            res.json(movie[0].Director);
         })
         .catch((err) => {
             console.error(err);
@@ -86,7 +86,7 @@ app.post('/users', (req, res) => {
             res.status(500).send('Error: ' + error);
         });
 });
-//working
+//working?
 app.put('/users/:Username', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
         $set:
@@ -108,9 +108,9 @@ app.put('/users/:Username', (req, res) => {
         });
 });
 //not working
-app.post('/users/:Username/movies/:MovieID', (req, res) => {
+app.post('/users/:Username/movies/:$oid', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $push: { FavoriteMovies: req.params.MovieID }
+        $push: { FavoriteMovies: req.params.$oid }
     },
         { new: true },
         (err, updatedUser) => {
@@ -123,9 +123,9 @@ app.post('/users/:Username/movies/:MovieID', (req, res) => {
         });
 });
 //not working
-app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+app.delete('/users/:Username/movies/:$oid', (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $push: { FavoriteMovies: req.params.MovieID }
+        $push: { FavoriteMovies: req.params.$oid }
     },
         { new: true }, // This line makes sure that the updated document is returned
         (err, updatedUser) => {
