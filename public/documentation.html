@@ -39,7 +39,7 @@
         </tr>
         <tr>
             <td>Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
-            <td>/genres/[description]</td>
+            <td>/movies/Genres/[Description]</td>
             <td>Get</td>
             <td>genre title</td>
             <td>None</td>
@@ -47,11 +47,19 @@
         </tr>
         <tr>
             <td>Return data about a director (bio, birth year, death year) by name</td>
-            <td>/directors</td>
+            <td>/movies/[Director]</td>
             <td>Get</td>
             <td>director name</td>
             <td>None</td>
             <td>A JSON object holding data about a single director</td>
+        </tr>
+        <tr>
+            <td>Return a list of all users</td>
+            <td>/users</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>None</td>
+            <td>A JSON object holding data about all users</td>
         </tr>
         <tr>
             <td>Allow new users to register</td>
@@ -71,7 +79,7 @@
         </tr>
         <tr>
             <td>Allow users to add a movie to their list of favorites</td>
-            <td>/users/id/favorites/[title]</td>
+            <td>/users/[Username]/movies/[oid]</td>
             <td>POST</td>
             <td>movie title</td>
             <td>A movie title</td>
@@ -79,7 +87,7 @@
         </tr>
         <tr>
             <td>Allow users to remove a movie from their list of favorites</td>
-            <td>/users/id/favorites/[title]</td>
+            <td>/users/[Username]/movies/[oid]</td>
             <td>DELETE</td>
             <td>movie title</td>
             <td>None</td>
@@ -87,7 +95,7 @@
         </tr>
         <tr>
             <td>Allow existing users to deregister</td>
-            <td>/users/[id]</td>
+            <td>/users/[Username]</td>
             <td>DELETE</td>
             <td>movie title</td>
             <td>None</td>
