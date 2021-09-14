@@ -21,11 +21,16 @@ require('./passport.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+//localdb for testing
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 //connects to Mongo Atlas, enviroment variable set in Heroku
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // GET requests
+//Home screen of API
+app.get('/', (req, res) => {
+    res.status(200).send('Welcome to JakesMovieDB!')
+});
 //get all movies- returns as json
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
@@ -127,7 +132,7 @@ app.put('/users/:Username', [
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
 ], passport.authenticate('jwt', { session: false }), (req, res) => {
-    
+
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
