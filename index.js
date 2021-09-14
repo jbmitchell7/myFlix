@@ -2,16 +2,18 @@ const express = require('express'),
     morgan = require('morgan'),
     mongoose = require('mongoose'),
     Models = require('./models.js'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    passport = require('passport'),
+    cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 app.use(express.static('public'));
+app.use(cors());
 
 let auth = require('./auth.js')(app);
-const passport = require('passport');
 require('./passport.js');
 
 const Movies = Models.Movie;
