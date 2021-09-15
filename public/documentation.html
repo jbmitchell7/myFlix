@@ -66,7 +66,7 @@
             <td>/users</td>
             <td>POST</td>
             <td>None</td>
-            <td>A JSON object containing a username and email address</td>
+            <td>A JSON object containing a username, password, email address, birthday(optional), FavortieMovies(array, optional)</td>
             <td>A text message saying the user was registered</td>
         </tr>
         <tr>
@@ -74,22 +74,22 @@
             <td>/users/[username]</td>
             <td>PUT</td>
             <td>username</td>
-            <td>None</td>
-            <td>A text message saying username was updated</td>
+            <td>A JSON object containing a username, password, email address, birthday(optional), FavortieMovies(array, optional)</td>
+            <td>JSON object containing updated user info</td>
         </tr>
         <tr>
             <td>Allow users to add a movie to their list of favorites</td>
-            <td>/users/[Username]/movies/[Title]</td>
+            <td>/users/[Username]/movies/[_id]</td>
             <td>POST</td>
-            <td>movie title</td>
-            <td>A movie title</td>
+            <td>movie _id</td>
+            <td>None</td>
             <td>A text message saying movie was added to favorites</td>
         </tr>
         <tr>
             <td>Allow users to remove a movie from their list of favorites</td>
-            <td>/users/[Username]/movies/[Title]</td>
+            <td>/users/[Username]/movies/[_id]</td>
             <td>DELETE</td>
-            <td>movie title</td>
+            <td>movie _id</td>
             <td>None</td>
             <td>A text message saying a movie was removed from favorites</td>
         </tr>
@@ -97,7 +97,7 @@
             <td>Allow existing users to deregister</td>
             <td>/users/[Username]</td>
             <td>DELETE</td>
-            <td>movie title</td>
+            <td>Username</td>
             <td>None</td>
             <td>A text message saying that user email has been removed</td>
         </tr>

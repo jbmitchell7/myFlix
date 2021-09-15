@@ -104,7 +104,7 @@ app.post('/users', [
     Users.findOne({ Username: req.body.Username })
     .then((user) => {
         if (user) {
-            return res.status(400).send(req.body.Username + 'already exists');
+            return res.status(400).send(req.body.Username + ' already exists');
         } else {
             Users
             .create({
@@ -125,7 +125,7 @@ app.post('/users', [
         res.status(500).send('Error: ' + error);
     });
 });
-//change username- returns string confirmation
+//update user info- returns json of updated user
 app.put('/users/:Username', [
     check('Username', 'Username is required').isLength({ min: 5 }),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
