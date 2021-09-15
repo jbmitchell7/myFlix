@@ -160,9 +160,9 @@ app.put('/users/:Username', [
     });
 });
 //add movie to favorites - returns string confirmation
-app.post('/users/:Username/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users/:Username/movies/:_id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $push: { FavoriteMovies: req.params.Title }
+        $push: { FavoriteMovies: req.params._id }
     },
     { new: true },
     (err, updatedUser) => {
@@ -170,14 +170,14 @@ app.post('/users/:Username/movies/:Title', passport.authenticate('jwt', { sessio
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.status(200).send(req.params.Title + ' has been added to favorites.');
+            res.status(200).send(req.params._id + ' has been added to favorites.');
         }
     });
 });
 //remove movie from favorites - returns string confirmation
-app.delete('/users/:Username/movies/:Title', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.delete('/users/:Username/movies/:_id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $pull: { FavoriteMovies: req.params.Title }
+        $pull: { FavoriteMovies: req.params._id }
     },
     { new: true }, // This line makes sure that the updated document is returned
     (err, updatedUser) => {
@@ -185,7 +185,7 @@ app.delete('/users/:Username/movies/:Title', passport.authenticate('jwt', { sess
             console.error(err);
             res.status(500).send('Error: ' + err);
         } else {
-            res.status(200).send(req.params.Title + ' has been removed from favorites.');
+            res.status(200).send(req.params._id + ' has been removed from favorites.');
         }
     });
 });
