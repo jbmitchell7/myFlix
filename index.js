@@ -29,7 +29,7 @@ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnified
 // GET requests
 //Home screen of API
 app.get('/', (req, res) => {
-    res.status(200).send('Welcome to JakesMovieDB!')
+    res.status(200).redirect('/documentation')
 });
 //get all movies- returns as json
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
