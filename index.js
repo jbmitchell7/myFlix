@@ -5,14 +5,15 @@ const express = require('express'),
     cors = require('cors');
 
 const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 app.use(express.static('public'));
 app.use(cors());
 
-let auth = require('./auth.js')(app);
-require('./passport.js');
+require('./auth')(app);
+require('./passport');
 require('./movies')(app);
 require('./users')(app);
 
@@ -21,8 +22,7 @@ require('./users')(app);
 //connects to Mongo Atlas, enviroment variable set in Heroku
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// GET requests
-//Home screen of API
+//Home screen redirect
 app.get('/', (req, res) => {
     res.status(200).redirect('/documentation.html')
 });

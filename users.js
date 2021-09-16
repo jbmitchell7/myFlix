@@ -1,8 +1,8 @@
-const Models = require('./models.js'),
+const Models = require('./models'),
     passport = require('passport');
 
-require('./auth.js')
-require('./passport.js');
+require('./auth')
+require('./passport');
 
 const { check, validationResult } = require('express-validator');
 
