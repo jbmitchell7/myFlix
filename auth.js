@@ -1,5 +1,6 @@
 //must be same key used in JWTStrategy in passport.js
-const jwtSecret = 'your_jwt_secret';
+//saved in Heroku config vars
+const jwtSecret = process.env.JWTSECRET;
 
 const jwt = require('jsonwebtoken'),
     passport = require('passport');
