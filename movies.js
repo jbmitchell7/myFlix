@@ -6,7 +6,8 @@ const Movies = Models.Movie;
 // GET requests
 module.exports = (app) => {
     //get all movies- returns as json
-    app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+    //, passport.authenticate('jwt', { session: false }) add back to get movies once login is created client-side
+    app.get('/movies', (req, res) => {
         Movies.find()
             .then((movies) => {
                 res.status(201).json(movies);
