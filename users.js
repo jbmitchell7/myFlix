@@ -75,7 +75,7 @@ module.exports = (app) => {
     //update user info- returns json of updated user
     app.put('/users/:Username', [
         check('Username', 'Username is required').isLength({ min: 5 }),
-        check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+        //check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
         check('Password', 'Password is required').not().isEmpty(),
         check('Password', 'Password is required').isLength({ min: 8 }),
         check('Email', 'Email does not appear to be valid').isEmail()
