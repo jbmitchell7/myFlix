@@ -111,11 +111,12 @@ module.exports = (app) => {
             $addToSet: { FavoriteMovies: req.params._id }
         },
             { new: true },
-            (err) => {
-                if (err) {
-                    console.error(err);
-                    res.status(500).send('Error: ' + err);
+            (response) => {
+                if (response) {
+                    console.error(response);
+                    res.status(500).send('Error: ' + response);
                 } else {
+                    res.json(response);
                     res.status(200).send(req.params._id + ' has been added to favorites.');
                 }
             });
