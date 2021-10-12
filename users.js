@@ -118,8 +118,7 @@ module.exports = (app) => {
                     console.error(response);
                     res.status(500).send('Error: ' + response);
                 } else {
-                    res.json(response);
-                    res.status(200).send(req.params._id + ' has been added to favorites.');
+                    res.status(200).send(req.params._id);
                 }
             });
     });
@@ -134,7 +133,7 @@ module.exports = (app) => {
                     console.error(err);
                     res.status(500).send('Error: ' + err);
                 } else {
-                    res.status(200).send(req.params._id + ' has been removed from favorites.');
+                    res.status(200).send(req.params._id);
                 }
             });
     });
