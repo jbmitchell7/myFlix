@@ -135,12 +135,12 @@ module.exports = (app) => {
             $addToSet: { FavoriteMovies: req.params._id }
         },
             { new: true },
-            (response) => {
-                if (response) {
-                    console.error(response);
-                    res.status(500).send('Error: ' + response);
+            (res) => {
+                if (res) {
+                    console.error(res);
+                    res.status(500).send('Error: ' + res);
                 } else {
-                    res.status(200).send(response);
+                    res.status(200).send(res);
                 }
             });
     });
