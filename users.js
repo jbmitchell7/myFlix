@@ -23,6 +23,17 @@ module.exports = (app) => {
     });
     //get specific user
     app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+        Users.findOne({ Username: req.params.Username })
+            .then((user) => {
+                res.json(user);
+            })
+            .catch((err) => {
+                console.error(err);
+                res.status(500).send('Error: ' + err);
+            });
+    });
+    //get favorites
+    app.get('/users/:Username/FavoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
         let favorites = [];
         Users.findOne({ Username: req.params.Username })
             .then((user) => {
@@ -35,17 +46,6 @@ module.exports = (app) => {
                         })
                         res.json(favorites);
                     })
-            })
-            .catch((err) => {
-                console.error(err);
-                res.status(500).send('Error: ' + err);
-            });
-    });
-    //get favorites
-    app.get('/users/:Username/FavoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
-        Users.findOne({ Username: req.params.Username })
-            .then((user) => {
-                res.json(user.FavoriteMovies);
             })
             .catch((err) => {
                 console.error(err);
