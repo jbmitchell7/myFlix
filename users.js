@@ -135,12 +135,12 @@ module.exports = (app) => {
             $addToSet: { FavoriteMovies: req.params._id }
         },
             { new: true },
-            (res) => {
-                if (res) {
-                    console.error(res);
-                    res.status(500).send('Error: ' + res);
+            (response) => {
+                if (response) {
+                    console.error(response);
+                    res.status(500).send('Error: ' + response);
                 } else {
-                    res.status(200).send(res);
+                    res.status(200).send(response);
                 }
             });
     });
@@ -150,12 +150,12 @@ module.exports = (app) => {
             $pull: { FavoriteMovies: req.params._id }
         },
             { new: true }, // This line makes sure that the updated document is returned
-            (res) => {
-                if (res) {
-                    console.error(res);
-                    res.status(500).send('Error: ' + res);
+            (err) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).send('Error: ' + err);
                 } else {
-                    res.status(200).send(res);
+                    res.status(200).send(err);
                 }
             });
     });
