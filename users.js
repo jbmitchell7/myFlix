@@ -23,9 +23,18 @@ module.exports = (app) => {
     });
     //get specific user
     app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+        let favorites = [];
         Users.findOne({ Username: req.params.Username })
             .then((user) => {
-                res.json(user);
+                Movies.find()
+                    .then(movies => {
+                        movies.map((movie) => {
+                            if (movie._id === user.FavoriteMovies.find(m => m === movie._id)) {
+                                movie.push(favorites);
+                            }
+                        })
+                        res.json(favorites);
+                    })
             })
             .catch((err) => {
                 console.error(err);
