@@ -37,10 +37,11 @@ module.exports = (app) => {
         let favorites = [];
         Users.findOne({ Username: req.params.Username })
             .then((user) => {
+                let userFavs = user.FavoriteMovies;
                 Movies.find()
                     .then(movies => {
                         movies.map((movie) => {
-                            if (movie._id === user.FavoriteMovies.find(m => m === movie._id)) {
+                            if (movie._id === userFavs.find(m => m === movie._id)) {
                                 movie.push(favorites);
                             }
                         })
