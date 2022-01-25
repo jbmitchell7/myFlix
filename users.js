@@ -7,7 +7,7 @@ require('./passport');
 const { check, validationResult } = require('express-validator');
 
 const Users = Models.User;
-const Movies = Models.Movie;
+// const Movies = Models.Movie;
 
 module.exports = (app) => {
     //get all users- returns json
@@ -33,26 +33,26 @@ module.exports = (app) => {
             });
     });
     //get favorites
-    app.get('/users/:Username/FavoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
-        let favorites = [];
-        Users.findOne({ Username: req.params.Username })
-            .then((user) => {
-                let userFavs = user.FavoriteMovies;
-                Movies.find()
-                    .then(movies => {
-                        movies.map((movie) => {
-                            if (movie._id === userFavs.find(m => m === movie._id)) {
-                                movie.push(favorites);
-                            }
-                        })
-                        res.json(favorites);
-                    })
-            })
-            .catch((err) => {
-                console.error(err);
-                res.status(500).send('Error: ' + err);
-            });
-    });
+    // app.get('/users/:Username/FavoriteMovies', passport.authenticate('jwt', { session: false }), (req, res) => {
+    //     let favorites = [];
+    //     Users.findOne({ Username: req.params.Username })
+    //         .then((user) => {
+    //             let userFavs = user.FavoriteMovies;
+    //             Movies.find()
+    //                 .then(movies => {
+    //                     movies.map((movie) => {
+    //                         if (movie._id === userFavs.find(m => m === movie._id)) {
+    //                             movie.push(favorites);
+    //                         }
+    //                     })
+    //                     res.json(favorites);
+    //                 })
+    //         })
+    //         .catch((err) => {
+    //             console.error(err);
+    //             res.status(500).send('Error: ' + err);
+    //         });
+    // });
     //create new user - returns string confirmation
     app.post('/users', [
         check('Username', 'Username is required').isLength({ min: 5 }),
