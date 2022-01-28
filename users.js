@@ -7,7 +7,7 @@ require('./passport');
 const { check, validationResult } = require('express-validator');
 
 const Users = Models.User;
-// const Movies = Models.Movie;
+const Movies = Models.Movie;
 
 module.exports = (app) => {
     /**
